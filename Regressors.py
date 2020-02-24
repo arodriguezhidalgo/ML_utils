@@ -49,7 +49,7 @@ class Regressors:
             clf = AdaBoostRegressor(random_state = self.seed)
             param_grid = {
                 'n_estimators': [50, 100, 200, 400],
-                'learning_rate': [.1, .01, .001, .0001, None],
+                'learning_rate': [.1, .01, .001, .0001],
                 'loss': ['linear', 'square', 'exponential'],
             }
         # ------------------------------------------------
@@ -80,7 +80,7 @@ class Regressors:
             clf = RandomForestRegressor(random_state = self.seed);
             param_grid = {
                 'n_estimators': [50, 100, 200, 400],
-                'max_depth': [1, 3, 5, None],
+                'max_depth': [2, 3, 5, None],
                 'min_samples_split': [2, 4, 8],
                 'min_samples_leaf': [1, 3, 5],
             }
