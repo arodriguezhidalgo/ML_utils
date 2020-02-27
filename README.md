@@ -1,4 +1,8 @@
 # ML_utils
+v0.4:
+* Added some code to create and fit a Dense neural network.
+* Slight mods in the param_dist for Regressors.
+
 v0.3:
 * Some code to extract features. 
 * I need to include a script with auditory features using librosa. 

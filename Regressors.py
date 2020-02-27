@@ -3,7 +3,7 @@ class Regressors:
         self.seed = seed;
         self.CV = CV;
 
-    def get_regressor(self,regressor_name):
+    def get_regressor(self,regressor_name, input_params = None):
         import random
         random.seed(self.seed)
         # ------------------------------------------------
@@ -16,7 +16,7 @@ class Regressors:
             from sklearn.kernel_ridge import KernelRidge
             clf = KernelRidge()
             param_grid = {
-                'kernel': ['rbf', 'poly'],
+                'kernel': ['rbf'],
                 'coef0': [0, 1.0, 2.0],
                 'degree': [1, 2, 3, 4],
                 'alpha': [1, .1, .01, .001, .0001],
@@ -36,12 +36,14 @@ class Regressors:
         if regressor_name == 'SVR':
             from sklearn.svm import SVR
             clf = SVR()
+            if input_params != None:
+                clf.set_params(**input_params)
             param_grid = {
-                'kernel': ['rbf', 'poly', 'linear'],
-                'C': [.1, .01, .001],  # [1, .1, .01, .001, .0001],
-                'degree': [2, 3, 4],
+                'kernel': ['rbf', 'linear'],
+                'C': [10, 1, .1, .01, .001],  # [1, .1, .01, .001, .0001],
+                'degree': [1, 2, 3, 4],
                 'coef0': [0, 1.0, 2.0],
-                'gamma': [.01, .001, .0001]
+                'gamma': [1,.1, .01, .001, .0001]
             }
         # ------------------------------------------------
         if regressor_name == 'AdaBoost':
@@ -69,8 +71,10 @@ class Regressors:
         if regressor_name == 'KNN':
             from sklearn.neighbors import KNeighborsRegressor
             clf = KNeighborsRegressor();
+            if input_params != None:
+                clf.set_params(**input_params)
             param_grid = {
-                'n_neighbors': [1,3,5, 10, 20, 30, 40, 50, 60, 70],
+                'n_neighbors': [1,3,5, 10, 20, 30],
                 'algorithm': ['ball_tree', 'kd_tree', 'brute'],
                 'weights': ['uniform', 'distance'],
             }
@@ -117,7 +121,7 @@ class Regressors:
         if self.CV == True:
             return self.model.best_estimator_.predict(x)
         else:
-            return self.model.predict(x)
+            return self.clf.predict(x)
 
     def plot_results(self, y_test, y_pred, score_function, verbose = False):
         import matplotlib.pyplot as plt
