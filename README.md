@@ -1,4 +1,8 @@
 # ML_utils
+v0.5:
+* Implemented Dropout and BatchNorm for the NeuralNetwork.
+* Attempted to include Residual lines in NeuralNetwork, although it needs to be checked.
+
 v0.4:
 * Added some code to create and fit a Dense neural network.
 * Slight mods in the param_dist for Regressors.
